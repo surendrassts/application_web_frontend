@@ -21,11 +21,22 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
                 #$this->load->library('Layouts');
-		$this->load->view('welcome_message');
+                $data = array('data'=>'','msg'=>'','status'=>'');
+                $this->load->model('utilities');
+                if($this->input->post('g_s_key')){
+                $reqdata = $this->input->post();                
+                $search_results = $this->utilities->getSearchResults($reqdata);                
+                $data['search_results'] = $search_results;
+                }
+                $cities = $this->utilities->getAllCities();
+                $data['cities'] = $cities;
+		$this->load->view('welcome_message',$data);
+                
 	}
         
         public function __construct() {
             parent::__construct();
+            $this->load->helper('url');
         }
 
 

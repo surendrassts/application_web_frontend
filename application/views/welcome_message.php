@@ -1,13 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-?>
-
-
+?><!DOCTYPE html>
 <html lang="en">
 <head>
-    
-    
-  
 	<meta charset="utf-8">
 	<title>Welcome to CodeIgniter</title>
 
@@ -73,16 +68,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 
 <div id="container">
-	<h1>Welcome to Doctor App Admin module</h1>
+	<h1>Welcome to Doctor App</h1>
 
 	<div id="body">
-            <!--<form name="search_form" method="post" id="search_form" action="<?php echo base_url();?>welcome/search" >
-                <label>Search Keyword:</label><input type="text" name="search"/><b/>
-                <input type="submit" name="submit" id="submit" value="Search"/>
-            </form>-->
-           Welcome to Doctor App Admin module 
-           <br/>
-           <a href="<?php echo base_url();?>user/login">Login</a> 
+            <div style="width: 20%;float: left">Left
+                <ul style="list-style: none">
+                    <li><a href="doctor/appointments">Appointments</a></li>
+                    <li><a href="medicines/index">Medicines</a></li>
+                    
+                </ul>
+            </div>
+            <div style="width: 60%;float: left">Middle
+                <form name="g_search" id="g_search" method="post">
+                    <select name="g_s_city">
+                        <option value="">Select City</option>
+                        <?php foreach ($cities as $city) {?>
+                        <option value="<?php echo $city->id;?>"><?php echo $city->name;?></option>
+                        <?php }?>
+                        
+                    </select><input type="text" name="g_s_key"/><input type="submit" name="g_s_submit" value="Submit"/>
+                </form>
+                <br/>
+                <?php print_r($search_results); ?>
+            </div>
+            <div style="width: 20%;float: left">Right</div>
+            <div style="clear:both"></div>
 	</div>
 
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
