@@ -55,7 +55,7 @@ class Utilities extends CI_Model{
     
     function getSearchResults($reqdata){
         $result = FALSE;
-        $query = $this->db->query("select s.* from specializations_and_services s where s.name like '%".$reqdata['g_s_key']."%' ");
+        $query = $this->db->query("select s.* from specializations_and_services s join entity_specializations es on s.id=es.specialization_id join entities e on es.entity_id=e.id join entity_types et on e.entity_type=et.id where s.name like '%".$reqdata['g_s_key']."%'");
         $result = $query->result();
         return $result;
     }

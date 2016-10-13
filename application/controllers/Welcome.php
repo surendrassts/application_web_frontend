@@ -21,7 +21,7 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
                 #$this->load->library('Layouts');
-                $data = array('data'=>'','msg'=>'','status'=>'');
+                $data = array('data'=>'','msg'=>'','status'=>'','search_results'=>'');
                 $this->load->model('utilities');
                 if($this->input->post('g_s_key')){
                 $reqdata = $this->input->post();                
