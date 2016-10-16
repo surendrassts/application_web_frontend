@@ -63,6 +63,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		border: 1px solid #D0D0D0;
 		box-shadow: 0 0 8px #D0D0D0;
 	}
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
 	</style>
 </head>
 <body>
@@ -89,7 +104,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </select><input type="text" name="g_s_key"/><input type="submit" name="g_s_submit" value="Submit"/>
                 </form>
                 <br/>
-                <?php print_r($search_results); ?>
+                <table>
+                <?php
+                if(!empty ($search_results_doctors)){
+                foreach($search_results_doctors as $result){
+                ?>
+                    <tr><td><img src="<?php echo base_url();?>/"/></td><td><?php echo $result->name?></td></tr>
+                <?php
+                }} ?>
+                <?php
+                if(!empty ($search_results)){
+                foreach($search_results as $result){
+                ?>
+                    <tr><td><img src="<?php echo base_url();?>/"/></td><td><?php echo $result->name?></td></tr>
+                <?php
+                }} ?>
+                </table>
             </div>
             <div style="width: 20%;float: left">Right</div>
             <div style="clear:both"></div>

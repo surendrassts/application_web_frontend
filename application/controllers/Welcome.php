@@ -25,8 +25,10 @@ class Welcome extends CI_Controller {
                 $this->load->model('utilities');
                 if($this->input->post('g_s_key')){
                 $reqdata = $this->input->post();                
-                $search_results = $this->utilities->getSearchResults($reqdata);                
+                $search_results_doctors = $this->utilities->get_search_results_with_doctors($reqdata);
+                $search_results = $this->utilities->get_search_results_without_doctors($reqdata);
                 $data['search_results'] = $search_results;
+                $data['search_results_doctors'] = $search_results_doctors;
                 }
                 $cities = $this->utilities->getAllCities();
                 $data['cities'] = $cities;
