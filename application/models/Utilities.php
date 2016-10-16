@@ -55,15 +55,15 @@ class Utilities extends CI_Model{
     
     function get_search_results_without_doctors($reqdata){
         $result = FALSE;
-        echo "select s.id,s.name specialization,e.name from specializations_and_services s join entity_specializations es on s.id=es.specialization_id join entities e on es.entity_id=e.id join entity_branches eb on eb.entity_id=e.id join entity_types et on e.entity_type=et.id where (s.name like '%".$reqdata['g_s_key']."%' or e.name like '%".$reqdata['g_s_key']."%') and et.id!='".$this->config->item('doctors_entity_type')."' and s.status=1 and e.status=1 and eb.status=1 and et.status=1";
-        $query = $this->db->query("select s.id,s.name specialization,e.name from specializations_and_services s join entity_specializations es on s.id=es.specialization_id join entities e on es.entity_id=e.id join entity_branches eb on eb.entity_id=e.id join entity_types et on e.entity_type=et.id where (s.name like '%".$reqdata['g_s_key']."%' or e.name like '%".$reqdata['g_s_key']."%') and et.id!='".$this->config->item('doctors_entity_type')."' and s.status=1 and e.status=1 and eb.status=1 and et.status=1");
+        //echo "select s.id,s.name specialization,e.name from specializations_and_services s join entity_specializations es on s.id=es.specialization_id join entities e on es.entity_id=e.id join entity_branches eb on eb.entity_id=e.id join entity_types et on e.entity_type=et.id where (s.name like '%".$reqdata['g_s_key']."%' or e.name like '%".$reqdata['g_s_key']."%') and et.id!='".$this->config->item('doctors_entity_type')."' and s.status=1 and e.status=1 and eb.status=1 and et.status=1";
+        $query = $this->db->query("select s.id,s.name specialization,e.name,eb.addressline1,eb.addressline2,eb.city,eb.state,eb.zipcode from specializations_and_services s join entity_specializations es on s.id=es.specialization_id join entities e on es.entity_id=e.id join entity_branches eb on eb.entity_id=e.id join entity_types et on e.entity_type=et.id where (s.name like '%".$reqdata['g_s_key']."%' or e.name like '%".$reqdata['g_s_key']."%') and et.id!='".$this->config->item('doctors_entity_type')."' and s.status=1 and e.status=1 and eb.status=1 and et.status=1");
         $result = $query->result();
         return $result;
     }
 
     function get_search_results_with_doctors($reqdata){
         $result = FALSE;
-        echo "select s.id,s.name specialization,e.name from specializations_and_services s join entity_specializations es on s.id=es.specialization_id join entities e on es.entity_id=e.id join entity_types et on e.entity_type=et.id where (s.name like '%".$reqdata['g_s_key']."%' or e.name like '%".$reqdata['g_s_key']."%') and et.id='".$this->config->item('doctors_entity_type')."' and s.status=1 and e.status=1 and et.status=1";
+        //echo "select s.id,s.name specialization,e.name from specializations_and_services s join entity_specializations es on s.id=es.specialization_id join entities e on es.entity_id=e.id join entity_types et on e.entity_type=et.id where (s.name like '%".$reqdata['g_s_key']."%' or e.name like '%".$reqdata['g_s_key']."%') and et.id='".$this->config->item('doctors_entity_type')."' and s.status=1 and e.status=1 and et.status=1";
         $query = $this->db->query("select s.id,s.name specialization,e.name from specializations_and_services s join entity_specializations es on s.id=es.specialization_id join entities e on es.entity_id=e.id join entity_types et on e.entity_type=et.id where (s.name like '%".$reqdata['g_s_key']."%' or e.name like '%".$reqdata['g_s_key']."%') and et.id='".$this->config->item('doctors_entity_type')."' and s.status=1 and e.status=1 and et.status=1");
         $result = $query->result();
         return $result;

@@ -109,14 +109,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 if(!empty ($search_results_doctors)){
                 foreach($search_results_doctors as $result){
                 ?>
-                    <tr><td><img src="<?php echo base_url();?>/"/></td><td><?php echo $result->name?></td></tr>
+                <tr><td><div>
+                    <div style="float:left;width: 20%"><img style="width:50px;height: 50px" src="<?php echo base_url();?>assets/images/user_img.png"/></div>
+                    <div style="float:left;width: 80%"><?php echo $result->name?></div>
+                    <div style="clear:both"></div></div>
+                </td></tr>
                 <?php
                 }} ?>
                 <?php
                 if(!empty ($search_results)){
                 foreach($search_results as $result){
                 ?>
-                    <tr><td><img src="<?php echo base_url();?>/"/></td><td><?php echo $result->name?></td></tr>
+                <tr><td><div>
+                    <div style="float:left;width: 20%"><img style="width:50px;height: 50px" src="<?php echo base_url();?>assets/images/hospital_img.png"/></div>
+                    <div style="float:left;width: 80%"><?php echo $result->name?></div>
+                    <div style="clear:both"></div></div>
+                    </td></tr>
                 <?php
                 }} ?>
                 </table>
