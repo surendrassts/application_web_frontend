@@ -122,7 +122,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 ?>
                 <tr><td><div>
                     <div style="float:left;width: 20%"><img style="width:50px;height: 50px" src="<?php echo base_url();?>assets/images/hospital_img.png"/></div>
-                    <div style="float:left;width: 80%"><?php echo $result->name?></div>
+                    <div style="float:left;width: 80%">
+                    <?php echo $result->name?><br/>
+                    <?php echo $result->addressline1?><br/>
+                    <?php echo $result->addressline2?><br/>
+                    <?php echo $result->city_name?><br/>
+                    </div>
                     <div style="clear:both"></div></div>
                     </td></tr>
                 <?php
