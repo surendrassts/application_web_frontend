@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <head>
 	<meta charset="utf-8">
 	<title>Welcome to CodeIgniter</title>
-
+        <script type='text/javascript' src="<?php echo $this->config->item('assets_base_url');?>assets/js/common.js"></script>
 	<style type="text/css">
 
 	::selection { background-color: #E13300; color: white; }
@@ -78,7 +78,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         tr:nth-child(even) {
             background-color: #dddddd;
         }
+        #bpopup_div {
+            background-color: #fff;
+            color:#000;
+            text-align: center;
+            width: 600px;
+        }
 	</style>
+<script src="https://code.jquery.com/jquery-1.9.1.js" integrity="sha256-e9gNBsAcA0DBuRWbm0oZfbiCyhjLrI6bmqAl5o+ZjUA=" crossorigin="anonymous"></script>
+<script type='text/javascript' src="<?php echo $this->config->item('assets_base_url');?>assets/js/bpopup/jquery.bpopup.min.js"></script>
+
 </head>
 <body>
 
@@ -111,8 +120,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 ?>
                 <tr><td><div>
                     <div style="float:left;width: 20%"><img style="width:50px;height: 50px" src="<?php echo base_url();?>assets/images/user_img.png"/></div>
-                    <div style="float:left;width: 80%"><?php echo $result->name?></div>
-                    <div style="clear:both"></div></div>
+                    <div style="float:left;width: 80%">
+                    <?php echo $result->name;?>
+                    <?php echo $result->user_add_line1;?><br/>
+                    <?php echo $result->user_add_line2;?><br/>
+                    <?php echo $result->user_city;?><br/>
+                    <?php echo $result->user_state;?><br/>
+                    <a class="check-availability" id="check-availability<?php echo $result->user_id; ?>">Check Availability</a>
+                    </div>
+                <script type="text/javascript">
+                    $("#check-availability<?php echo $result->user_id; ?>").bind("click",function(){
+                        var data = {"user_id":<?php echo $result->user_id; ?>};
+                        web.doctors.checkavailability(data);
+                    });
+                </script>
+                <div style="clear:both"></div></div>
                 </td></tr>
                 <?php
                 }} ?>
@@ -123,10 +145,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <tr><td><div>
                     <div style="float:left;width: 20%"><img style="width:50px;height: 50px" src="<?php echo base_url();?>assets/images/hospital_img.png"/></div>
                     <div style="float:left;width: 80%">
-                    <?php echo $result->name?><br/>
-                    <?php echo $result->addressline1?><br/>
-                    <?php echo $result->addressline2?><br/>
-                    <?php echo $result->city_name?><br/>
+                    <?php echo $result->name;?>
+                    <?php echo $result->addressline1;?><br/>
+                    <?php echo $result->addressline2;?><br/>
+                    <?php echo $result->city_name;?><br/>
                     </div>
                     <div style="clear:both"></div></div>
                     </td></tr>
@@ -136,6 +158,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
             <div style="width: 20%;float: left">Right</div>
             <div style="clear:both"></div>
+            <div id="bpopup_div" style="display:none"></div>
 	</div>
 
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>

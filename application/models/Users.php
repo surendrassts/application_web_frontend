@@ -43,12 +43,10 @@ class Users extends CI_Model{
             }else{
                 $this->db->set($data);
                 $return = $this->db->insert('users',$data);
-                
             }
-            
         }else{
             $this->db->set($data);
-            $return = $this->db->insert('users',$data);    
+            $return = $this->db->insert('users',$data);
         }
         return $return;
     }

@@ -33,11 +33,11 @@ class Welcome extends CI_Controller {
                 $cities = $this->utilities->getAllCities();
                 $data['cities'] = $cities;
 		$this->load->view('welcome_message',$data);
-                
 	}
         
         public function __construct() {
             parent::__construct();
+            @session_start();
             $this->load->helper('url');
         }
 
@@ -51,8 +51,46 @@ class Welcome extends CI_Controller {
                 $this->load->model('vendors');
                 $result = $this->vendors->getVendors($query_data);
                 $data = array('data'=>$result,'msg'=>'','status'=>'');
-                
             }
             $this->load->view('search',$data);
+	}
+
+        public function checkAvailability()
+	{
+            #$this->load->library('Layouts');
+            $data = array('data'=>'','msg'=>'','status'=>'','message'=>'');
+            $this->load->model('utilities');
+            $reqdata = $this->input->post();
+            //$this->output->set_content_type('text/plain', 'UTF-8');
+            $results = $this->utilities->doctor_checkAvailability($reqdata);
+            $data['results'] = $results;
+            $data_o = $this->load->view('check_availability',$data,true);
+            $this->output->set_output($data_o);
+	}
+
+        public function bookAppointment()
+	{
+            #$this->load->library('Layouts');
+            $data = array('data'=>'','msg'=>'','status'=>'','message'=>'');
+            $this->load->model('utilities');
+            $reqdata = $this->input->post();
+            print_r($reqdata);
+            if(!empty ($_SESSION['user'])){
+                $reqdata['bookedby'] = $_SESSION['user']->id;
+            }  else {
+                $reqdata['bookedby'] = '0';
+            }
+            $reqdata['slot_end'] = date("H:i",strtotime("+14 minutes",strtotime($reqdata["appointment_check_date"].' '.$reqdata["slot_start"])));
+            //$this->output->set_content_type('text/plain', 'UTF-8');
+            $result = $this->utilities->doctor_bookAppointment($reqdata);
+            if($result){
+                $reqdata['appointment_id'] = $result;
+                $results = $this->utilities->getAppointmentDetails($reqdata);
+                $data['data'] = $results;
+            }  else {
+                $data = array('data'=>'','msg'=>'','status'=>'error','message'=>'Error in Booking Appointment');
+            }
+            $data_o = $this->load->view('book_appointment',$data,true);
+            $this->output->set_output($data_o);
 	}
 }

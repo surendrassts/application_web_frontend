@@ -63,12 +63,83 @@ class Utilities extends CI_Model{
 
     function get_search_results_with_doctors($reqdata){
         $result = FALSE;
-        //echo "select s.id,s.name specialization,e.name from specializations_and_services s join entity_specializations es on s.id=es.specialization_id join entities e on es.entity_id=e.id join entity_types et on e.entity_type=et.id where (s.name like '%".$reqdata['g_s_key']."%' or e.name like '%".$reqdata['g_s_key']."%') and et.id='".$this->config->item('doctors_entity_type')."' and s.status=1 and e.status=1 and et.status=1";
-        $query = $this->db->query("select s.id,s.name specialization,e.name from specializations_and_services s join entity_specializations es on s.id=es.specialization_id join entities e on es.entity_id=e.id join entity_types et on e.entity_type=et.id where (s.name like '%".$reqdata['g_s_key']."%' or e.name like '%".$reqdata['g_s_key']."%') and et.id='".$this->config->item('doctors_entity_type')."' and s.status=1 and e.status=1 and et.status=1");
+        //echo "select s.id,s.name specialization,e.name,ua.* from specializations_and_services s join entity_specializations es on s.id=es.specialization_id join entities e on es.entity_id=e.id join user_address ua on ua.user_id=e.user_id join entity_types et on e.entity_type=et.id where (s.name like '%".$reqdata['g_s_key']."%' or e.name like '%".$reqdata['g_s_key']."%') and et.id='".$this->config->item('doctors_entity_type')."' and s.status=1 and e.status=1 and et.status=1";
+        $query = $this->db->query("select s.id,s.name specialization,e.name,ua.* from specializations_and_services s join entity_specializations es on s.id=es.specialization_id join entities e on es.entity_id=e.id join user_address ua on ua.user_id=e.user_id join entity_types et on e.entity_type=et.id where (s.name like '%".$reqdata['g_s_key']."%' or e.name like '%".$reqdata['g_s_key']."%') and et.id='".$this->config->item('doctors_entity_type')."' and s.status=1 and e.status=1 and et.status=1");
         $result = $query->result();
         return $result;
     }
     
+    function doctor_checkAvailability($reqdata){
+        $result;
+        $dates_data = array();
+        if(isset($reqdata['appointment_check_date'])){
+            $dates_data['appointment_check_date'] = $reqdata['appointment_check_date'];
+            $dates_data['appointment_check_next_date'] = date('Y-m-d',strtotime($reqdata['appointment_check_date'] . "+1 days"));
+            $now = time(); // or your date as well
+            $input_date = strtotime($reqdata['appointment_check_date']);
+            $datediff = $now - $input_date;
+            $datediff = floor($datediff / (60 * 60 * 24));
+            if($datediff==0){
+            $dates_data['appointment_check_previous_date'] = '';
+            }else{
+            $dates_data['appointment_check_previous_date'] = date('Y-m-d',strtotime($reqdata['appointment_check_date'] . "-1 days"));
+            }
+            $reqdata['appointment_week_day'] = date('N',strtotime($reqdata['appointment_check_date']));
+            $result['dates_data'] = $dates_data;
+        }else{
+            $dates_data['appointment_check_date'] = date('Y-m-d');
+            $dates_data['appointment_check_next_date'] = date('Y-m-d',strtotime(date('Y-m-d') . "+1 days"));
+            $dates_data['appointment_check_previous_date'] = '';
+            $reqdata['appointment_week_day'] = date('N');
+            $result['dates_data'] = $dates_data;
+            //echo date('Y-m-d');echo date_default_timezone_get();
+        }
+        if(!empty ($reqdata['user_id'])){
+        $result['user_data'] = array('user_id'=>$reqdata['user_id']);
+        $query = $this->db->query("select id,user_id,week_day,time_start,time_end from doctor_availability_mgmt where user_id=".$this->db->escape($reqdata['user_id'])." and week_day=".$this->db->escape($reqdata['appointment_week_day'])." and is_active=1");
+        $result['availability'] = $query->result();
+        $query = $this->db->query("select * from doctor_availability_mgmt dam join entities e on e.id=dam.h_entity_id join entity_branches eb on dam.h_entity_branch_id=eb.id where dam.user_id=".$this->db->escape($reqdata['user_id'])." and dam.week_day=".$this->db->escape($reqdata['appointment_week_day'])." and dam.is_active=1");
+        $result['entity_details'] = $query->result_array();
+        $query = $this->db->query("select * from doctor_appointments da where da.d_user_id=".$this->db->escape($reqdata['user_id'])." and da.booked_at=".$this->db->escape($dates_data['appointment_check_date']));
+        $result['appointments'] = $query->result_array();
+        $start_time = strtotime(date('Y-m-d').' '.$this->config->item('doctors_start_time'));
+        $end_time = strtotime(date('Y-m-d').' '.$this->config->item('doctors_end_time'));
+        $slots = array();
+        while(($end_time-$start_time)>=0){
+            //echo "========start==".$start_time."=========end===".$end_time."<br/>";
+            $slot_start = date("H:i",$start_time);
+            array_push($slots,array("slot_start"=>$slot_start,"status"=>1));
+            $start_time = strtotime("+15 minutes", $start_time);
+        }
+        $result['slots'] = $slots;
+        }
+        return $result;
+    }
+
+    public function doctor_bookAppointment($reqdata){
+        $result;
+        $this->db->trans_start();
+        $result = FALSE;
+        $query = $this->db->query("select * from entities where user_id=".$this->db->escape($reqdata['user_id']));
+        $enity_details = $query->result();
+        print_r($enity_details);
+        echo "insert into doctor_appointments(d_user_id,d_entity_id,h_entity_id,h_entity_branch_id,time_start,time_end,bookedby,booked_at,booked_for,name,email,mobile,created_at) values('".$this->db->escape($reqdata['user_id'])."',".$enity_details[0]->id.",".$this->db->escape($reqdata['h_entity_id']).",".$this->db->escape($reqdata['h_entity_branch_id']).",".$this->db->escape($reqdata['slot_start']).",".$this->db->escape($reqdata['slot_end']).",".$this->db->escape($reqdata['bookedby']).",".$this->db->escape($reqdata['appointment_check_date']).",".$this->db->escape($reqdata['problem']).",".$this->db->escape($reqdata['patient_name']).",".$this->db->escape($reqdata['email']).",".$this->db->escape($reqdata['mobile_number']).",now())";
+        $query = $this->db->query("insert into doctor_appointments(d_user_id,d_entity_id,h_entity_id,h_entity_branch_id,time_start,time_end,bookedby,booked_at,booked_for,name,email,mobile,created_at) values(".$this->db->escape($reqdata['user_id']).",".$enity_details[0]->id.",".$this->db->escape($reqdata['h_entity_id']).",".$this->db->escape($reqdata['h_entity_branch_id']).",".$this->db->escape($reqdata['slot_start']).",".$this->db->escape($reqdata['slot_end']).",".$this->db->escape($reqdata['bookedby']).",".$this->db->escape($reqdata['appointment_check_date']).",".$this->db->escape($reqdata['problem']).",".$this->db->escape($reqdata['patient_name']).",".$this->db->escape($reqdata['email']).",".$this->db->escape($reqdata['mobile_number']).",now())");
+        if($query){
+            $result = $this->db->insert_id();
+            $this->db->trans_complete();
+        }
+        return $result;
+    }
+
+    public function getAppointmentDetails($reqdata){
+        $result = FALSE;
+        $query = $this->db->query("select * from doctor_appointments da join entities e on da.h_entity_id=e.id join entity_branches eb on da.h_entity_branch_id where da.id='".$this->db->escape($reqdata['appointment_id'])."'");
+        if($query){
+            $result = $query->result();
+        }
+        return $result;
+    }
 }
 
 ?>

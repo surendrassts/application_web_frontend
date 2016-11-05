@@ -44,6 +44,34 @@ getcities: function(url,state_id){
 }
 }
 
+var web = {};
+web.doctors ={
+checkavailability:function(data){
+    $.ajax({
+        type:"POST",
+        url : "welcome/checkAvailability",
+        data: data,
+        success: function(data){
+            console.log(data);
+            $("#bpopup_div").html(data);
+            $("#bpopup_div").bPopup();
+        }
+    });
+},
+bookAppointment:function(data){
+    $.ajax({
+        type:"POST",
+        url : "welcome/bookAppointment",
+        data: data,
+        success: function(data){
+            console.log(data);
+            $("#bpopup_div").html(data);
+            $("#bpopup_div").bPopup();
+        }
+    });
+}
+};
+
 
 
 
