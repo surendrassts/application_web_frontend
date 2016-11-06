@@ -82,7 +82,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             display: none;
         }
 	</style>
-        <
 </head>
 <body>
 <script type="text/javascript">
@@ -128,10 +127,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </script>
 <div id="container">
 	<h1>Welcome to Doctor App</h1>
-        <input type="hidden" id="data_user_id" data-user-id="<?php echo $results['user_data']['user_id']; ?>"/>
-        <input type="hidden" id="data_hospital_entity_id" data-hospital-entity-id="<?php echo $results['entity_details'][0]['h_entity_id']; ?>"/>
-        <input type="hidden" id="data_hospital_entity_branch_id" data-hospital-entity-branch-id="<?php echo $results['entity_details'][0]['h_entity_branch_id']; ?>"/>
-        <input type="hidden" id="data_slot_start" data-slot-start=""/>
 	<div id="body">
             <a id="check-availability-previous"><?php echo $results['dates_data']['appointment_check_previous_date']; ?></a> | 
             <span id="appointment_check_date"><?php echo $results['dates_data']['appointment_check_date']; ?></span> |
@@ -148,7 +143,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
            <?php           
            foreach ($results['slots'] as $slot){
            ?>
-           <a href="#" class="time-slot" data-slot-time="<?php echo $slot['slot_start'];?>"><?php echo $slot['slot_start']?></a>
+           <a <?php if($slot['status']){ ?>href="#" class="time-slot" <?php }?> data-slot-time="<?php echo $slot['slot_start'];?>"><?php echo $slot['slot_start']?></a>
            <?php
            }
            ?>
@@ -167,7 +162,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
            </div>
            <div id="slot-booking" class="appointment-details">
                <div class="patient-name"><input type="button" id="book-appointment" name="book-appointment" value="Book Appointment"/></div>               
-           </div>           
+           </div>
+        <input type="hidden" id="data_user_id" data-user-id="<?php echo $results['user_data']['user_id']; ?>"/>
+        <?php if(!empty ($results['entity_details']['0'])){ ?>
+        <input type="hidden" id="data_hospital_entity_id" data-hospital-entity-id="<?php echo $results['entity_details'][0]['h_entity_id']; ?>"/>
+        <input type="hidden" id="data_hospital_entity_branch_id" data-hospital-entity-branch-id="<?php echo $results['entity_details'][0]['h_entity_branch_id']; ?>"/>
+        <?php } ?>
+        <input type="hidden" id="data_slot_start" data-slot-start=""/>
 	</div>        
 	<p class="footer"></p>
 </div>

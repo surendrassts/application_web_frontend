@@ -92,14 +92,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 
 <div id="container">
-	<h1>Welcome to Doctor App</h1>
-
+    <div><h1>Welcome to Doctor App module</h1>
+        <div style="text-align:right;">
+        <?php if(isset ($_SESSION['user'])){?>Welcome <?php echo $_SESSION['user']->user_email;?> | <a href="<?php echo base_url();?>user/logout">Logout</a><?php }  else {?>
+        <a href="<?php echo base_url();?>user/login">Login</a>
+        <?php }?>
+        </div>
+    </div>
 	<div id="body">
             <div style="width: 20%;float: left">Left
                 <ul style="list-style: none">
-                    <li><a href="doctor/appointments">Appointments</a></li>
-                    <li><a href="medicines/index">Medicines</a></li>
-                    
+                    <li><a href="<?php echo base_url();?>">Home</a></li>
+                    <?php if(isset ($_SESSION['user'])){?>
+                    <li><a href="<?php echo base_url();?>bbank/raisedrequests">Blood Requests</a>
+                        <ul>
+                            <li><a href="<?php echo base_url();?>bbank/raiserequest">Raise Request</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="<?php echo base_url();?>doctor/appointments">Appointments</a></li>
+                    <li><a href="<?php echo base_url();?>doctor/bookings">Bookings</a></li>
+                    <?php }?>
                 </ul>
             </div>
             <div style="width: 60%;float: left">Middle
@@ -119,14 +131,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 foreach($search_results_doctors as $result){
                 ?>
                 <tr><td><div>
-                    <div style="float:left;width: 20%"><img style="width:50px;height: 50px" src="<?php echo base_url();?>assets/images/user_img.png"/></div>
+                    <div style="float:left;width: 20%"><img style="width:50px;height: 50px" src="<?php echo $this->config->item('assets_base_url');?>assets/images/user_img.png"/></div>
                     <div style="float:left;width: 80%">
                     <?php echo $result->name;?>
                     <?php echo $result->user_add_line1;?><br/>
                     <?php echo $result->user_add_line2;?><br/>
                     <?php echo $result->user_city;?><br/>
                     <?php echo $result->user_state;?><br/>
-                    <a class="check-availability" id="check-availability<?php echo $result->user_id; ?>">Check Availability</a>
+                    <a class="check-availability" id="check-availability<?php echo $result->user_id; ?>">Book Appointment</a>
                     </div>
                 <script type="text/javascript">
                     $("#check-availability<?php echo $result->user_id; ?>").bind("click",function(){

@@ -5,6 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <head>
 	<meta charset="utf-8">
 	<title>Welcome to CodeIgniter</title>
+
 	<style type="text/css">
 
 	::selection { background-color: #E13300; color: white; }
@@ -62,44 +63,66 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		border: 1px solid #D0D0D0;
 		box-shadow: 0 0 8px #D0D0D0;
 	}
+       table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
 	</style>
 </head>
 <body>
 
 <div id="container">
-    <div><h1>Welcome to Doctor App Module</h1>
-        <div style="text-align:right;">
-        <?php if(isset ($_SESSION['user'])){?>Welcome <?php echo $_SESSION['user']->user_email;?> | <a href="<?php echo base_url();?>user/logout">Logout</a><?php }  else {?>
-        <a href="<?php echo base_url();?>user/login">Login</a>
-        <?php }?>
-        </div>
-    </div>
+    <div><h1>Welcome to Doctor App Admin module</h1>
+        <div style="text-align:right;">Welcome <?php echo $_SESSION['user']->user_email;?> | <a href="<?php echo base_url();?>user/logout">Logout</a></div></div>
 	<div id="body">
-            <div style="width: 20%;float: left">Left
-                <ul style="list-style: none">
+            <div style="width:20%;float: left;">Menu
+                <ul style="list-style: none;">
                     <li><a href="<?php echo base_url();?>">Home</a></li>
-                    <?php if(isset ($_SESSION['user'])){?>
+                    <?php if(isset($_SESSION['user'])){?>
                     <li><a href="<?php echo base_url();?>bbank/raisedrequests">Blood Requests</a>
                         <ul>
-                            <li><a href="<?php echo base_url();?>bbank/raiserequest">Raise Request</a></li>
+                            <li><a href="<?php echo base_url();?>bbank/raiserequest">Raise Request</a></li>                            
                         </ul>
                     </li>
                     <li><a href="<?php echo base_url();?>doctor/appointments">Appointments</a></li>
                     <li><a href="<?php echo base_url();?>doctor/bookings">Bookings</a></li>
                     <?php }?>
                 </ul>
+            </div><div  style="width:80%;float: left;">Content
+            <table>
+              <tr>
+                <th>Hospital Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Status</th>
+              </tr>
+              <?php 
+              foreach($bookings as $row){
+              ?>
+              <tr>
+                <td><?php echo $row->name;?></td>
+                <td><?php echo $row->booked_at;?></td>
+                <td><?php echo $row->time_start;?></td>
+                <td><?php if($row->app_status==1){echo "Active";}elseif ($row->app_status==0) {
+                    echo "Blocked";}?>
+                </td>
+              </tr>
+              <?php
+              }?>              
+            </table>
             </div>
-            <div style="width: 60%;float: left">Middle
-            <?php echo $msg;?>
-            <form name="login" method="post" id="login" >
-                <label>Email:</label><input type="text" name="email"/><b/>
-                <label>Password:</label><input type="password" name="password"/><br/>
-                <input type="submit" name="submit" id="submit" value="Login"/>
-            </form>
-            </div>
-            <div style="width: 20%;float: left">Right</div>
-            <div style="clear:both"></div>
-            <div id="bpopup_div" style="display:none"></div>
+            <div style="clear: both"></div>
 	</div>
 
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>

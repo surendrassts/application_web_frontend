@@ -66,4 +66,40 @@ class Bbank extends CI_Controller {
             }
             $this->load->view('bbanks/create',$data);
         }
+
+        public function raiserequest() {
+            $this->load->helper('url');
+            $this->load->model('bbanks');
+            $data = array('data'=>'','msg'=>'','status'=>'');
+            try {
+            if($this->input->post('raise_submit')){
+                $reqdata = $this->input->post();
+                $reqdata['raised_by'] = $_SESSION['user']->id;
+                $result = $this->bbanks->raiserequest($reqdata);
+                if($result){
+                    $data = array('data'=>$result,'msg'=>'Blood Request raised successfully','status'=>'success');
+                }  else {
+                    $data = array('data'=>$result,'msg'=>'There is an error in backend','status'=>'error');
+                }
+            }
+            }  catch (Exception $e){
+                $data = array('data'=>$result,'msg'=>'There is an error in backend','status'=>'error');
+            }
+            $this->load->view('bbanks/raiserequest',$data);
+        }
+
+        public function raisedrequests() {
+            $this->load->helper('url');
+            $this->load->model('bbanks');
+            $data = array('data'=>'','msg'=>'','status'=>'');
+            try {
+                $reqdata = $this->input->post();
+                $reqdata['raised_by'] = $_SESSION['user']->id;
+                $result = $this->bbanks->raisedrequests($reqdata);
+                $data = array('data'=>$result,'msg'=>'','status'=>'');
+            }  catch (Exception $e){
+                $data = array('data'=>$result,'msg'=>'There is an error in backend','status'=>'error');
+            }
+            $this->load->view('bbanks/raisedrequests',$data);
+        }
 }

@@ -44,7 +44,27 @@ class Bbanks extends CI_Model{
             }
         }
         return $result;
-    }    
+    }
+
+    function raiserequest($reqdata){
+        $this->db->trans_start();
+        $result = FALSE;
+        $query = $this->db->query("insert into blood_requests(blood_group,no_of_units,required_date,required_time,hospital_name,loc_addressline1,loc_addressline2,loc_city,loc_state,loc_zipcode,poc_name,poc_email,poc_mobile,raised_by) values(".$this->db->escape($reqdata['blood_group']).",".$this->db->escape($reqdata['no_of_units']).",".$this->db->escape($reqdata['required_date']).",".$this->db->escape($reqdata['required_time']).",".$this->db->escape($reqdata['hospital_name']).",".$this->db->escape($reqdata['loc_addressline1']).",".$this->db->escape($reqdata['loc_addressline2']).",".$this->db->escape($reqdata['loc_city']).",".$this->db->escape($reqdata['loc_state']).",".$this->db->escape($reqdata['loc_zipcode']).",".$this->db->escape($reqdata['poc_name']).",".$this->db->escape($reqdata['poc_email']).",".$this->db->escape($reqdata['poc_mobile']).",".$this->db->escape($reqdata['raised_by']).")");
+        if($query){
+            $result = $this->db->insert_id();
+            $this->db->trans_complete();
+        }
+        return $result;
+    }
+
+    function raisedrequests($reqdata){
+        $result = FALSE;
+        $query = $this->db->query("select * from blood_requests where raised_by=".$this->db->escape($reqdata['raised_by']));
+        if($query){
+            $result = $query->result();
+        }
+        return $result;
+    }
     
 }
 

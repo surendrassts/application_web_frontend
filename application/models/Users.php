@@ -23,7 +23,7 @@ class Users extends CI_Model{
     }
     
     function Authenticate($data){
-        $query = $this->db->query("select * from users u join user_roles ur on ur.user_id=u.user_id where u.user_email='".$data['email']."' and ur.role_id=2");
+        $query = $this->db->query("select * from users u join user_roles ur on ur.user_id=u.user_id where u.user_email='".$data['email']."' or u.user_mobile='".$data['email']."'");
         $result = $query->result();
         foreach ($result as $row){
             if($row->user_password == md5($data['password'])){

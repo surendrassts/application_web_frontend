@@ -68,28 +68,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 
 <div id="container">
-    <div><h1>Welcome to Doctor App Admin module</h1>
+    <div><h1>Welcome to Doctor App module</h1>
         <div style="text-align:right;">Welcome <?php echo $_SESSION['user']->user_email;?> | <a href="<?php echo base_url();?>user/logout">Logout</a></div></div>
 	<div id="body">
             <div style="width:20%;float: left;">Menu
                 <ul style="list-style: none;">
-                    <li><a href="<?php echo base_url();?>user/details">Users</a></li>
-                    <li><a href="<?php echo base_url();?>hospital/details">Hospitals</a>
+                    <li><a href="<?php echo base_url();?>">Home</a></li>
+                    <?php if(isset ($_SESSION['user'])){?>
+                    <li><a href="<?php echo base_url();?>bbank/raisedrequests">Blood Requests</a>
                         <ul>
-                            <li><a href="<?php echo base_url();?>hospital/create">Create</a></li>                            
+                            <li><a href="<?php echo base_url();?>bbank/raiserequest">Raise Request</a></li>
                         </ul>
                     </li>
-                    <li><a href="<?php echo base_url();?>bbank/details">Blood Banks</a>
-                        <ul>
-                            <li><a href="<?php echo base_url();?>bbank/create">Create</a></li>                            
-                        </ul>
-                    </li>
-                    <li><a href="<?php echo base_url();?>pharmacy/details">Pharmacy</a>
-                        <ul>
-                            <li><a href="<?php echo base_url();?>pharmacy/create">Create</a></li>                            
-                        </ul>
-                    </li>
-                    <li><a href="">Profile</a></li>                    
+                    <li><a href="<?php echo base_url();?>doctor/appointments">Appointments</a></li>
+                    <li><a href="<?php echo base_url();?>doctor/bookings">Bookings</a></li>
+                    <?php }?>
                 </ul>
             </div><div  style="width:80%;float: left;">Content</div>
             <div style="clear: both"></div>
