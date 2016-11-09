@@ -4,7 +4,7 @@
  * Layouts Class. PHP5 only. 
  * 
  */
-class Layouts { 
+class Templates { 
     
   // Will hold a CodeIgniter instance 
   private $CI; 
@@ -13,18 +13,34 @@ class Layouts {
   private $title_for_layout = NULL; 
     
   // The title separator, ' | ' by default 
-  private $title_separator = ' | '; 
+  private $title_separator = ' | ';
+  
+  private $layout =  'default';
     
-  public function __construct()  
+  public function __construct()
   { 
-    $this->CI =& get_instance(); 
+    $this->CI =& get_instance();
   } 
     
-  public function set_title($title) 
+  public function set_title($title)
   { 
-    $this->title_for_layout = $title; 
-  } 
-    
+    $this->title_for_layout = $title;
+  }
+  
+  public function setLayout($layout){
+    $this->layout = $layout; 
+  }
+  
+  public function load($view_name, $params = array()){ 
+    // Load the view's content, with the params passed 
+    $view_content = $this->CI->load->view($view_name, $params, TRUE); 
+  
+    // Now load the layout, and pass the view we just rendered 
+    $this->CI->load->view('layouts/' . $this->layout, array( 
+      'content' => $view_content,'assets_base_url' => $this->CI->config->item('assets_base_url')
+    ));
+  }
+  
   public function view($view_name, $params = array(), $layout = 'default') 
   {  
     // Handle the site's title. If NULL, don't add anything. If not, add a  
@@ -44,18 +60,10 @@ class Layouts {
     )); 
   } 
     
-  public function add_include($path, $prepend_base_url = 'http://localhost/docsapp/') 
+  public function add_include($path) 
   { 
-    if ($prepend_base_url) 
-    { 
-      $this->CI->load->helper('url'); // Load this just to be sure 
-      $this->file_includes[] = $prepend_base_url.$path; 
-    } 
-    else
-    { 
-      $this->file_includes[] = $path; 
-    } 
-  
+    $this->CI->load->helper('url'); // Load this just to be sure 
+    $this->file_includes[] = $this->CI->config->item('assets_base_url').$path;   
     return $this; // This allows chain-methods 
   } 
   

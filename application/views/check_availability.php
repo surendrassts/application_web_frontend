@@ -86,13 +86,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 <script type="text/javascript">
     $("#check-availability-next").bind("click",function(){
-        alert("dsfdsfds");
         var data = {"user_id":$("#data_user_id").attr("data-user-id"),"appointment_check_date":$(this).html()};
         web.doctors.checkavailability(data);
     });
     $("#check-availability-previous").bind("click",function(){
-        alert("gfggg");
-        alert($(this).html());
         var data = {"user_id":$("#data_user_id").attr("data-user-id"),"appointment_check_date":$(this).html()};
         web.doctors.checkavailability(data);
     });

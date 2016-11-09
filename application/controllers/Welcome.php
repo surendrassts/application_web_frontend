@@ -32,13 +32,14 @@ class Welcome extends CI_Controller {
                 }
                 $cities = $this->utilities->getAllCities();
                 $data['cities'] = $cities;
-		$this->load->view('welcome_message',$data);
+                $this->templates->load('welcome_message',$data);
 	}
         
         public function __construct() {
             parent::__construct();
             @session_start();
             $this->load->helper('url');
+            $this->load->library('templates');
         }
 
 

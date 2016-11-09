@@ -12,5 +12,5 @@ $config['doctors_entity_type'] = '4';
 $config['doctors_start_time'] = '09:00';
 $config['doctors_end_time'] = '22:00';
 $config['entity_doc_file_type'] = 'pdf';
-$config['assets_base_url'] = 'http://localhost/doctor_app_frontend/';
+$config['assets_base_url'] = 'http://localhost/doctor_app_frontend/assets/';
 ?>
