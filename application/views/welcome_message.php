@@ -7,6 +7,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	color:#000;
 	text-align: center;
 }
+.appointment-details{
+    display: none;
+}
 </style>
 <script type='text/javascript' src="<?php echo $this->config->item('assets_base_url');?>js/common.js"></script>
 <div class="row">

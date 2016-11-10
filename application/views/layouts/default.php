@@ -66,11 +66,6 @@
                             </div>
                             <div class="">
                                 <a href="#">
-                                    <i class="fa fa-cutlery icon-grey"></i>Frozen Foods
-                                </a>
-                            </div>
-                            <div class="">
-                                <a href="#">
                                     <i class="fa fa-plus icon-grey"></i>Medicines
                                 </a>
                             </div>
