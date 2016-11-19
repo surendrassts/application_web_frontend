@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
+?>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -65,17 +66,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	}
 	</style>
 </head>
-<body>
+<body>-->
 
-<div id="container">
-	<h1>Welcome to Doctor App module</h1>
-
-	<div id="body">
-                <a href="<?php echo base_url();?>user/login">Click here</a>to login           
-	</div>
-
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
+<div class="row">
+<div class="col-xs-12">
+<div>
+<div id="body">
+    <a href="<?php echo base_url();?>user/login">Click here</a>to login
 </div>
-
-</body>
-</html>
+</div>
+</div>
+</div>
+<!--</body>
+</html>-->

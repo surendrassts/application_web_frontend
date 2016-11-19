@@ -87,8 +87,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</style>
 </head>
 <body>-->
-<div id="container">
-<div id="body">
+<div class="row">
+<div class="col-xs-12">
         <div>
                 <div class="<?php echo $status;?>"><?php echo $msg;?></div>
                 <form name="raise_request_form" id="raise_request_form" method="post">

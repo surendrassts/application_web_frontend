@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
+?>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -65,31 +66,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	}
 	</style>
 </head>
-<body>
+<body>-->
 
-<div id="container">
-    <div><h1>Welcome to Doctor App module</h1>
-        <div style="text-align:right;">Welcome <?php echo $_SESSION['user_web']->user_email;?> | <a href="<?php echo base_url();?>user/logout">Logout</a></div></div>
-	<div id="body">
-            <div style="width:20%;float: left;">Menu
-                <ul style="list-style: none;">
-                    <li><a href="<?php echo base_url();?>">Home</a></li>
-                    <?php if(isset ($_SESSION['user_web'])){?>
-                    <li><a href="<?php echo base_url();?>bbank/raisedrequests">Blood Requests</a>
-                        <ul>
-                            <li><a href="<?php echo base_url();?>bbank/raiserequest">Raise Request</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="<?php echo base_url();?>doctor/appointments">Appointments</a></li>
-                    <li><a href="<?php echo base_url();?>doctor/bookings">Bookings</a></li>
-                    <?php }?>
-                </ul>
-            </div><div  style="width:80%;float: left;">Content</div>
-            <div style="clear: both"></div>
-	</div>
-
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
+<div class="row">
+<div class="col-xs-12">
+<div style="text-align: center">
+Dashboard is in progress
 </div>
-
-</body>
-</html>
+</div>
+</div>
+<!--</body>
+</html>-->

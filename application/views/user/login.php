@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
+?>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -65,45 +66,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</style>
 </head>
 <body>
-
-<div id="container">
-    <div><h1>Welcome to Doctor App Module</h1>
-        <div style="text-align:right;">
-        <?php if(isset ($_SESSION['user_web'])){?>Welcome <?php echo $_SESSION['user_web']->user_email;?> | <a href="<?php echo base_url();?>user/logout">Logout</a><?php }  else {?>
-        <a href="<?php echo base_url();?>user/login">Login</a>
-        <?php }?>
-        </div>
-    </div>
-	<div id="body">
-            <div style="width: 20%;float: left">Left
-                <ul style="list-style: none">
-                    <li><a href="<?php echo base_url();?>">Home</a></li>
-                    <?php if(isset ($_SESSION['user_web'])){?>
-                    <li><a href="<?php echo base_url();?>bbank/raisedrequests">Blood Requests</a>
-                        <ul>
-                            <li><a href="<?php echo base_url();?>bbank/raiserequest">Raise Request</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="<?php echo base_url();?>doctor/appointments">Appointments</a></li>
-                    <li><a href="<?php echo base_url();?>doctor/bookings">Bookings</a></li>
-                    <?php }?>
-                </ul>
-            </div>
-            <div style="width: 60%;float: left">Middle
-            <?php echo $msg;?>
-            <form name="login" method="post" id="login" >
-                <label>Email:</label><input type="text" name="email"/><b/>
-                <label>Password:</label><input type="password" name="password"/><br/>
-                <input type="submit" name="submit" id="submit" value="Login"/>
-            </form>
-            </div>
-            <div style="width: 20%;float: left">Right</div>
-            <div style="clear:both"></div>
-            <div id="bpopup_div" style="display:none"></div>
-	</div>
-
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
+-->
+<div class="row">
+<div class="col-xs-12">
+<div>
+<?php echo $msg;?>
+<form name="login" method="post" id="login" >
+    <label>Email:</label><input type="text" name="email"/><b/>
+    <label>Password:</label><input type="password" name="password"/>&nbsp;&nbsp;
+    <input type="submit" name="submit" id="submit" value="Login"/>
+</form>
+</div>
+</div>
 </div>
 
-</body>
-</html>
+<!--</body>
+</html>-->

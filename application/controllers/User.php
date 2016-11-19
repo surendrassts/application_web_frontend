@@ -26,6 +26,7 @@ class User extends CI_Controller {
         public function __construct() {
             parent::__construct();
             @session_start();
+            $this->load->library('templates');
         }
         
         public function login() {
@@ -54,14 +55,16 @@ class User extends CI_Controller {
                     
                 }*/
             }
-            $this->load->view('user/login',$data);
+            //$this->load->view('user/login',$data);
+            $this->templates->load('user/login',$data);
         }
         
         public function dashboard() {
             if (!isset ($_SESSION['user_web'])) {
                 redirect('user/login');
             }
-            $this->load->view('user/dashboard');
+            //$this->load->view('user/dashboard');
+            $this->templates->load('user/dashboard');
         }
         
         public function logout() {
@@ -69,7 +72,8 @@ class User extends CI_Controller {
                 redirect('user/login');
             }
             session_destroy();
-            $this->load->view('user/logout');
+            //$this->load->view('user/logout');
+            $this->templates->load('user/logout');
         }
         
         public function register() {

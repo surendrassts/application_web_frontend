@@ -30,8 +30,10 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="#" class="cart"><svg class="cart-symbol" width="16" height="16"><path d="M15.32 2.405H4.887C3 2.405 2.46.805 2.46.805L2.257.21C2.208.085 2.083 0 1.946 0H.336C.1 0-.064.24.024.46l.644 1.945L3.11 9.767c.047.137.175.23.32.23h8.418l-.493 1.958H3.768l.002.003c-.017 0-.033-.003-.05-.003-1.06 0-1.92.86-1.92 1.92s.86 1.92 1.92 1.92c.99 0 1.805-.75 1.91-1.712l5.55.076c.12.922.91 1.636 1.867 1.636 1.04 0 1.885-.844 1.885-1.885 0-.866-.584-1.593-1.38-1.814l2.423-8.832c.12-.433-.206-.86-.655-.86" fill="#0ea28f" data-reactid="57"></path></svg><!-- react-text: 58 --><span class="hidden-xs cart-title">CART</span><!-- /react-text --><span class="item-count badge badge-bc">0</span></a></li>
                             <li>
-                                <button class="btn login-button" data-toggle="modal" data-target="#myModal">
-   <span class="hidden-xs">LOGIN/REGISTER</span><i class="fa fa-user visible-xs"></i></button>
+                                <?php if(!isset ($_SESSION['user_web'])){?><a style="padding:0px" href="<?php echo base_url();?>user/login"><button class="btn login-button" data-toggle="modal" data-target="#myModal12">
+   <span class="hidden-xs">LOGIN/REGISTER</span><i class="fa fa-user visible-xs"></i></button></a><?php }else{?>
+   <a style="padding:0px" href="<?php echo base_url();?>user/logout"><button class="btn login-button" data-toggle="modal" data-target="#myModal12">
+   <span class="hidden-xs">LOGOUT</span><i class="fa fa-user visible-xs"></i></button></a><?php }?>
                             </li>
                         </ul>
                     </div><!-- //.navbar-collapse -->
