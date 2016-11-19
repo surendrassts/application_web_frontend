@@ -13,7 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </style>
 <script type='text/javascript' src="<?php echo $this->config->item('assets_base_url');?>js/common.js"></script>
 <div class="row">
-<div class="col-xs-10">
+<div class="col-xs-12">
 	<h1 class="mb-sm">FIND DOCTOR AND BOOK APPOINTMENT</h1>
 	<p>Tell us your problem and we will figure out the rest</p>
 	<form class="form main-search" name="g_search" id="g_search" method="post" role="form">

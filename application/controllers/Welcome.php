@@ -76,7 +76,7 @@ class Welcome extends CI_Controller {
             $this->load->model('utilities');
             $reqdata = $this->input->post();
             if(!empty ($_SESSION['user'])){
-                $reqdata['bookedby'] = $_SESSION['user']->id;
+                $reqdata['bookedby'] = $_SESSION['user_web']->id;
             }  else {
                 $reqdata['bookedby'] = '0';
             }

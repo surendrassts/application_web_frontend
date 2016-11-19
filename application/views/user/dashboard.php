@@ -69,7 +69,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <div id="container">
     <div><h1>Welcome to Doctor App module</h1>
-        <div style="text-align:right;">Welcome <?php echo $_SESSION['user']->user_email;?> | <a href="<?php echo base_url();?>user/logout">Logout</a></div></div>
+        <div style="text-align:right;">Welcome <?php echo $_SESSION['user_web']->user_email;?> | <a href="<?php echo base_url();?>user/logout">Logout</a></div></div>
 	<div id="body">
             <div style="width:20%;float: left;">Menu
                 <ul style="list-style: none;">

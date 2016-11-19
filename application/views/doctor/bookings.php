@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
+?>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -80,53 +81,56 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         }
 	</style>
 </head>
-<body>
+<body>-->
+<div class="row">
+<div class="col-xs-12">
+<style type="text/css">
+	#container {
+		margin: 10px;
+		border: 1px solid #D0D0D0;
+		box-shadow: 0 0 8px #D0D0D0;
+	}
+       table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
 
-<div id="container">
-    <div><h1>Welcome to Doctor App Admin module</h1>
-        <div style="text-align:right;">Welcome <?php echo $_SESSION['user']->user_email;?> | <a href="<?php echo base_url();?>user/logout">Logout</a></div></div>
-	<div id="body">
-            <div style="width:20%;float: left;">Menu
-                <ul style="list-style: none;">
-                    <li><a href="<?php echo base_url();?>">Home</a></li>
-                    <?php if(isset($_SESSION['user'])){?>
-                    <li><a href="<?php echo base_url();?>bbank/raisedrequests">Blood Requests</a>
-                        <ul>
-                            <li><a href="<?php echo base_url();?>bbank/raiserequest">Raise Request</a></li>                            
-                        </ul>
-                    </li>
-                    <li><a href="<?php echo base_url();?>doctor/appointments">Appointments</a></li>
-                    <li><a href="<?php echo base_url();?>doctor/bookings">Bookings</a></li>
-                    <?php }?>
-                </ul>
-            </div><div  style="width:80%;float: left;">Content
-            <table>
-              <tr>
-                <th>Hospital Name</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Status</th>
-              </tr>
-              <?php 
-              foreach($bookings as $row){
-              ?>
-              <tr>
-                <td><?php echo $row->name;?></td>
-                <td><?php echo $row->booked_at;?></td>
-                <td><?php echo $row->time_start;?></td>
-                <td><?php if($row->app_status==1){echo "Active";}elseif ($row->app_status==0) {
-                    echo "Blocked";}?>
-                </td>
-              </tr>
-              <?php
-              }?>              
-            </table>
-            </div>
-            <div style="clear: both"></div>
-	</div>
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
 
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+</style>
+<div>
+    <table>
+      <tr>
+        <th>Hospital Name</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Status</th>
+      </tr>
+      <?php
+      foreach($bookings as $row){
+      ?>
+      <tr>
+        <td><?php echo $row->name;?></td>
+        <td><?php echo $row->booked_at;?></td>
+        <td><?php echo $row->time_start;?></td>
+        <td><?php if($row->app_status==1){echo "Active";}elseif ($row->app_status==0) {
+            echo "Blocked";}?>
+        </td>
+      </tr>
+      <?php
+      }?>
+    </table>
 </div>
-
+</div>
+</div>
+<!--
 </body>
-</html>
+</html>-->

@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
+?>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -85,56 +86,45 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         }
 	</style>
 </head>
-<body>
-<div id="container">
-    <div><h1>Welcome to Doctor App module</h1>
-        <div style="text-align:right;">Welcome <?php echo $_SESSION['user']->user_email;?> | <a href="<?php echo base_url();?>user/logout">Logout</a></div></div>
-	<div id="body">
-            <div style="width:20%;float: left;">Menu
-                <ul style="list-style: none;">
-                    <li><a href="<?php echo base_url();?>">Home</a></li>
-                    <?php if(isset ($_SESSION['user'])){?>
-                    <li><a href="<?php echo base_url();?>bbank/raisedrequests">Blood Requests</a>
-                        <ul>
-                            <li><a href="<?php echo base_url();?>bbank/raiserequest">Raise Request</a></li>                            
-                        </ul>
-                    </li>
-                    <li><a href="<?php echo base_url();?>doctor/appointments">Appointments</a></li>
-                    <li><a href="<?php echo base_url();?>doctor/bookings">Bookings</a></li>
-                    <?php }?>
-                </ul>
-            </div><div  style="width:80%;float: left;">Content
-                <div class="<?php echo $status;?>"><?php echo $msg;?></div>
-                <form name="e_create_form" id="e_create_form" method="post">
-                    <table>
-                        <tr><td style="width:20%">Name:</td><td  style="width:80%"><input type="text" name="e_name" id="e_name"/></td></tr>
-                        <tr><td style="width:20%">Description:</td><td  style="width:80%"><textarea name="e_description" id="e_description"></textarea></td></tr>
-                        <tr><td style="width:20%">Status:</td><td  style="width:80%"><select name="e_status" id="e_status">
-                        <option value="0">Block</option>
-                        <option value="1" selected>Active</option>                        
-                    </select></td></tr>
-                        <tr><td style="width:20%">Website:</td><td  style="width:80%"><input type="text" name="e_website" id="e_website"/></td></tr>
-                        <tr><td style="width:20%">Location Details:</td><td  style="width:80%"></td></tr>
-                        <tr><td style="width:20%">Address line1:</td><td  style="width:80%"><input type="text" name="e_loc_addressline1" id="e_loc_addressline1"/></td></tr>
-                        <tr><td style="width:20%">Address line2:</td><td  style="width:80%"><input type="text" name="e_loc_addressline2" id="e_loc_addressline2"/></td></tr>
-                        <tr><td style="width:20%">City:</td><td  style="width:80%"><input type="text" name="e_loc_city" id="e_loc_city"/></td></tr>
-                        <tr><td style="width:20%">State:</td><td  style="width:80%"><input type="text" name="e_loc_state" id="e_loc_state"/></td></tr>
-                        <tr><td style="width:20%">Zip Code:</td><td  style="width:80%"><input type="text" name="e_loc_zipcode" id="e_loc_zipcode"/></td></tr>
-                        <tr><td style="width:20%">Phone:</td><td  style="width:80%"><input type="text" name="e_loc_phone" id="e_loc_phone"/></td></tr>
-                        <tr><td style="width:20%">Contact Person Details for This Location:</td><td  style="width:80%"></td></tr>
-                        <tr><td style="width:20%">First Name:</td><td  style="width:80%"><input type="text" name="e_poc_firstname" id="e_poc_firstname"/></td></tr>
-                        <tr><td style="width:20%">Last Name:</td><td  style="width:80%"><input type="text" name="e_poc_lastname" id="e_poc_lastname"/></td></tr>
-                        <tr><td style="width:20%">Email:</td><td  style="width:80%"><input type="text" name="e_poc_email" id="e_poc_email"/></td></tr>
-                        <tr><td style="width:20%">Mobile Number:</td><td  style="width:80%"><input type="text" name="e_poc_mobile" id="e_poc_mobile"/></td></tr>
-                        <tr><td style="width:20%"></td><td  style="width:80%"><input type="submit" name="e_create_submit" value="Submit"/></td></tr>                        
-                        </table>
-                </form>
-            </div>
-            <div style="clear: both"></div>
-	</div>
+<body>-->
+<div class="row">
+<div class="col-xs-12">
+<style type="text/css">
+	#container {
+		margin: 10px;
+		border: 1px solid #D0D0D0;
+		box-shadow: 0 0 8px #D0D0D0;
+	}
 
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
+</style>
+<div>
+    <div class="<?php echo $status;?>"><?php echo $msg;?></div>
+    <form name="e_create_form" id="e_create_form" method="post">
+        <table>
+            <tr><td style="width:20%">Name:</td><td  style="width:80%"><input type="text" name="e_name" id="e_name"/></td></tr>
+            <tr><td style="width:20%">Description:</td><td  style="width:80%"><textarea name="e_description" id="e_description"></textarea></td></tr>
+            <tr><td style="width:20%">Status:</td><td  style="width:80%"><select name="e_status" id="e_status">
+            <option value="0">Block</option>
+            <option value="1" selected>Active</option>
+            </select></td></tr>
+            <tr><td style="width:20%">Website:</td><td  style="width:80%"><input type="text" name="e_website" id="e_website"/></td></tr>
+            <tr><td style="width:20%">Location Details:</td><td  style="width:80%"></td></tr>
+            <tr><td style="width:20%">Address line1:</td><td  style="width:80%"><input type="text" name="e_loc_addressline1" id="e_loc_addressline1"/></td></tr>
+            <tr><td style="width:20%">Address line2:</td><td  style="width:80%"><input type="text" name="e_loc_addressline2" id="e_loc_addressline2"/></td></tr>
+            <tr><td style="width:20%">City:</td><td  style="width:80%"><input type="text" name="e_loc_city" id="e_loc_city"/></td></tr>
+            <tr><td style="width:20%">State:</td><td  style="width:80%"><input type="text" name="e_loc_state" id="e_loc_state"/></td></tr>
+            <tr><td style="width:20%">Zip Code:</td><td  style="width:80%"><input type="text" name="e_loc_zipcode" id="e_loc_zipcode"/></td></tr>
+            <tr><td style="width:20%">Phone:</td><td  style="width:80%"><input type="text" name="e_loc_phone" id="e_loc_phone"/></td></tr>
+            <tr><td style="width:20%">Contact Person Details for This Location:</td><td  style="width:80%"></td></tr>
+            <tr><td style="width:20%">First Name:</td><td  style="width:80%"><input type="text" name="e_poc_firstname" id="e_poc_firstname"/></td></tr>
+            <tr><td style="width:20%">Last Name:</td><td  style="width:80%"><input type="text" name="e_poc_lastname" id="e_poc_lastname"/></td></tr>
+            <tr><td style="width:20%">Email:</td><td  style="width:80%"><input type="text" name="e_poc_email" id="e_poc_email"/></td></tr>
+            <tr><td style="width:20%">Mobile Number:</td><td  style="width:80%"><input type="text" name="e_poc_mobile" id="e_poc_mobile"/></td></tr>
+            <tr><td style="width:20%"></td><td  style="width:80%"><input type="submit" name="e_create_submit" value="Submit"/></td></tr>
+            </table>
+    </form>
 </div>
-
-</body>
-</html>
+</div>
+</div>
+<!--</body>
+</html>-->

@@ -20,12 +20,13 @@ class Bbank extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+            $this->load->view('welcome_message');
 	}
         
         public function __construct() {
             parent::__construct();
             @session_start();
+            $this->load->library('templates');
         }
         
         public function details() {            
@@ -74,7 +75,7 @@ class Bbank extends CI_Controller {
             try {
             if($this->input->post('raise_submit')){
                 $reqdata = $this->input->post();
-                $reqdata['raised_by'] = $_SESSION['user']->id;
+                $reqdata['raised_by'] = $_SESSION['user_web']->id;
                 $result = $this->bbanks->raiserequest($reqdata);
                 if($result){
                     $data = array('data'=>$result,'msg'=>'Blood Request raised successfully','status'=>'success');
@@ -92,14 +93,18 @@ class Bbank extends CI_Controller {
             $this->load->helper('url');
             $this->load->model('bbanks');
             $data = array('data'=>'','msg'=>'','status'=>'');
+            if(!isset($_SESSION['user_web'])){
+                redirect('user/login');
+            }
             try {
                 $reqdata = $this->input->post();
-                $reqdata['raised_by'] = $_SESSION['user']->id;
+                $reqdata['raised_by'] = $_SESSION['user_web']->id;
                 $result = $this->bbanks->raisedrequests($reqdata);
                 $data = array('data'=>$result,'msg'=>'','status'=>'');
             }  catch (Exception $e){
                 $data = array('data'=>$result,'msg'=>'There is an error in backend','status'=>'error');
             }
-            $this->load->view('bbanks/raisedrequests',$data);
+            //$this->load->view('bbanks/raisedrequests',$data);
+            $this->templates->load('bbanks/raisedrequests',$data);
         }
 }

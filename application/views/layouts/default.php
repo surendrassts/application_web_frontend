@@ -22,7 +22,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                          </button>
-                        <a class="navbar-brand" href="#"><img src="<?php echo $assets_base_url;?>images/logo.png" alt="DoctorJI" class="img-responsive" id="header-logo"></a>
+                        <a class="navbar-brand" href="<?php echo base_url();?>"><img src="<?php echo $assets_base_url;?>images/logo.png" alt="DoctorJI" class="img-responsive" id="header-logo"></a>
                     </div>
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -45,12 +45,12 @@
                     <aside class="sidebar-left-collapse collapse navbar-collapse doc-left-nav" id="bs-example-navbar-collapse-1">
                         <div class="sidebar-links">
                             <div class="">
-                                <a href="#">
+                                <a href="<?php echo base_url();?>doctor/bookings">
                                     <i class="fa fa-bookmark-o icon-grey"></i>My Bookings
                                 </a>
                             </div>
                             <div class="selected">
-                                <a href="#">
+                                <a href="<?php echo base_url();?>doctor/appointments">
                                     <i class="fa fa-history icon-grey"></i>Appointments
                                 </a>
                             </div>
@@ -60,7 +60,7 @@
                                 </a>
                             </div>
                             <div class="">
-                                <a href="#">
+                                <a href="<?php echo base_url();?>bbank/raisedrequests">
                                     <i class="fa fa-keyboard-o icon-grey"></i>Raise Blood Req
                                 </a>
                             </div>
@@ -74,7 +74,7 @@
                 </div>
                 <div class="col-sm-10">
                     <div class="row">
-                    <div class="col-sm-9">
+                    <div class="col-sm-9 no-padding-desktop">
                     <div class="main-container">
                         <?php echo $content;?>                        
                     </div>

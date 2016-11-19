@@ -31,7 +31,7 @@ class Admin extends CI_Controller {
         }
         
         public function login() {
-            if (isset ($_SESSION['user'])) {
+            if (isset ($_SESSION['user_web'])) {
                 redirect('user/dashboard');
             }
             $data = array('msg'=>'','status'=>'','data'=>'');
@@ -44,7 +44,7 @@ class Admin extends CI_Controller {
                 if($returnValue){
                     if($returnValue->status==1){
                         @session_start();
-                        $_SESSION['user'] = $returnValue;
+                        $_SESSION['user_web'] = $returnValue;
                         redirect('user/dashboard');
                     }else{
                         $data = array('msg'=>'Your account is blocked, please contact our admin','status'=>'','data'=>'');
@@ -60,14 +60,14 @@ class Admin extends CI_Controller {
         }
         
         public function dashboard() {
-            if (!isset ($_SESSION['user'])) {
+            if (!isset ($_SESSION['user_web'])) {
                 redirect('user/login');
             }
             $this->load->view('user/dashboard');
         }
         
         public function logout() {
-            if (!isset ($_SESSION['user'])) {
+            if (!isset ($_SESSION['user_web'])) {
                 redirect('user/login');
             }
             session_destroy();
@@ -75,7 +75,7 @@ class Admin extends CI_Controller {
         }
         
         public function register() {
-            if (isset ($_SESSION['user'])) {
+            if (isset ($_SESSION['user_web'])) {
                 redirect('user/dashboard');
             }
             $data = array('msg'=>'','status'=>'','data'=>'');
