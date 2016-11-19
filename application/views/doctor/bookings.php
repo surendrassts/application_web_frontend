@@ -107,6 +107,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         }
 </style>
 <div>
+<?php if($bookings){?>
     <table>
       <tr>
         <th>Hospital Name</th>
@@ -128,6 +129,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <?php
       }?>
     </table>
+<?php }else{ ?>
+    <div style="text-align: center">No Records Found</div>
+<?php } ?>
 </div>
 </div>
 </div>

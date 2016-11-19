@@ -107,6 +107,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         }
 </style>
 <div>
+<div style="text-align:right;"><a href="<?php echo base_url();?>bbank/raiserequest">New Request</a></div>
+<?php if($data){?>
 <table>
   <tr>
     <th>Blood Group</th>
@@ -129,6 +131,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <?php
   }?>           
 </table>
+<?php }else{ ?>
+    <div style="text-align: center">No Records Found</div>
+<?php } ?>
 </div>
 </div>
 </div>

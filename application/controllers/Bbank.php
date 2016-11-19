@@ -86,7 +86,8 @@ class Bbank extends CI_Controller {
             }  catch (Exception $e){
                 $data = array('data'=>$result,'msg'=>'There is an error in backend','status'=>'error');
             }
-            $this->load->view('bbanks/raiserequest',$data);
+            //$this->load->view('bbanks/raiserequest',$data);
+            $this->templates->load('bbanks/raiserequest',$data);
         }
 
         public function raisedrequests() {

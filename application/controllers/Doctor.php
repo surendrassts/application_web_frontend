@@ -26,9 +26,9 @@ class Doctor extends CI_Controller {
         public function __construct() {
             parent::__construct();
             @session_start();
-            /*if(empty ($_SESSION['user_web'])){
+            if(empty ($_SESSION['user_web'])){
                 redirect('user/login');
-            }*/
+            }
             $this->load->library('templates');
         }
         
@@ -36,7 +36,7 @@ class Doctor extends CI_Controller {
             $data = array('data'=>'','msg'=>'','status'=>'');
             $this->load->model('utilities');
             $reqdata = $this->input->post();
-            $reqdata['bookedby'] = $_SESSION['user_web']->id;
+            $reqdata['bookedby'] = $_SESSION['user_web']->user_id;
             $results = $this->utilities->getAppointmentsByMe($reqdata);
             $data['bookings'] = $results;
             //$this->load->view('doctor/bookings',$data);
@@ -49,6 +49,12 @@ class Doctor extends CI_Controller {
             }
             $data = array('data'=>'','msg'=>'','status'=>'');
             //$this->load->view('doctor/appointments',$data);
+            $this->load->model('utilities');
+            $reqdata = $this->input->post();
+            $reqdata['bookedfor'] = $_SESSION['user_web']->user_id;
+            $results = $this->utilities->getAppointmentsForMe($reqdata);
+            $data['bookings'] = $results;
+            //$this->load->view('doctor/bookings',$data);
             $this->templates->load('doctor/appointments',$data);
         }
         

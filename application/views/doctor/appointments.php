@@ -24,16 +24,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		background-color: transparent;
 		font-weight: normal;
 	}
-        
-        success{
-		color: green;
-		font-weight: normal;
-	}
-        
-        error{
-		color: red;
-		font-weight: normal;
-	}
 
 	h1 {
 		color: #444;
@@ -81,8 +71,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         }
 
         td, th {
+            border: 1px solid #dddddd;
             text-align: left;
             padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
         }
 	</style>
 </head>
@@ -95,36 +90,51 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		border: 1px solid #D0D0D0;
 		box-shadow: 0 0 8px #D0D0D0;
 	}
+       table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
 
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
 </style>
 <div>
-    <div class="<?php echo $status;?>"><?php echo $msg;?></div>
-    <form name="e_create_form" id="e_create_form" method="post">
-        <table>
-            <tr><td style="width:20%">Name:</td><td  style="width:80%"><input type="text" name="e_name" id="e_name"/></td></tr>
-            <tr><td style="width:20%">Description:</td><td  style="width:80%"><textarea name="e_description" id="e_description"></textarea></td></tr>
-            <tr><td style="width:20%">Status:</td><td  style="width:80%"><select name="e_status" id="e_status">
-            <option value="0">Block</option>
-            <option value="1" selected>Active</option>
-            </select></td></tr>
-            <tr><td style="width:20%">Website:</td><td  style="width:80%"><input type="text" name="e_website" id="e_website"/></td></tr>
-            <tr><td style="width:20%">Location Details:</td><td  style="width:80%"></td></tr>
-            <tr><td style="width:20%">Address line1:</td><td  style="width:80%"><input type="text" name="e_loc_addressline1" id="e_loc_addressline1"/></td></tr>
-            <tr><td style="width:20%">Address line2:</td><td  style="width:80%"><input type="text" name="e_loc_addressline2" id="e_loc_addressline2"/></td></tr>
-            <tr><td style="width:20%">City:</td><td  style="width:80%"><input type="text" name="e_loc_city" id="e_loc_city"/></td></tr>
-            <tr><td style="width:20%">State:</td><td  style="width:80%"><input type="text" name="e_loc_state" id="e_loc_state"/></td></tr>
-            <tr><td style="width:20%">Zip Code:</td><td  style="width:80%"><input type="text" name="e_loc_zipcode" id="e_loc_zipcode"/></td></tr>
-            <tr><td style="width:20%">Phone:</td><td  style="width:80%"><input type="text" name="e_loc_phone" id="e_loc_phone"/></td></tr>
-            <tr><td style="width:20%">Contact Person Details for This Location:</td><td  style="width:80%"></td></tr>
-            <tr><td style="width:20%">First Name:</td><td  style="width:80%"><input type="text" name="e_poc_firstname" id="e_poc_firstname"/></td></tr>
-            <tr><td style="width:20%">Last Name:</td><td  style="width:80%"><input type="text" name="e_poc_lastname" id="e_poc_lastname"/></td></tr>
-            <tr><td style="width:20%">Email:</td><td  style="width:80%"><input type="text" name="e_poc_email" id="e_poc_email"/></td></tr>
-            <tr><td style="width:20%">Mobile Number:</td><td  style="width:80%"><input type="text" name="e_poc_mobile" id="e_poc_mobile"/></td></tr>
-            <tr><td style="width:20%"></td><td  style="width:80%"><input type="submit" name="e_create_submit" value="Submit"/></td></tr>
-            </table>
-    </form>
+<?php if($bookings){?>
+    <table>
+      <tr>
+        <th>Hospital Name</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Status</th>
+      </tr>
+      <?php
+      foreach($bookings as $row){
+      ?>
+      <tr>
+        <td><?php echo $row->name;?></td>
+        <td><?php echo $row->booked_at;?></td>
+        <td><?php echo $row->time_start;?></td>
+        <td><?php if($row->app_status==1){echo "Active";}elseif ($row->app_status==0) {
+            echo "Blocked";}?>
+        </td>
+      </tr>
+      <?php
+      }?>
+    </table>
+<?php }else{ ?>
+    <div style="text-align: center">No Records Found</div>
+<?php } ?>
 </div>
 </div>
 </div>
-<!--</body>
+<!--
+</body>
 </html>-->

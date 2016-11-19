@@ -170,6 +170,17 @@ class Utilities extends CI_Model{
         }
         return $result;
     }
+
+    public function getAppointmentsForMe($reqdata){
+        $result = FALSE;
+        //echo "select *,da.status as app_status from doctor_appointments da join entities e on da.h_entity_id=e.id join entity_branches eb on da.h_entity_branch_id and eb.entity_id=e.id where da.d_user_id=".$this->db->escape($reqdata['bookedfor'])." order by da.id desc";
+        $query = $this->db->query("select *,da.status as app_status from doctor_appointments da join entities e on da.h_entity_id=e.id join entity_branches eb on da.h_entity_branch_id and eb.entity_id=e.id where da.d_user_id=".$this->db->escape($reqdata['bookedfor'])." order by da.id desc");
+        if($query){
+            $result = $query->result();
+        }
+        return $result;
+    }
+
 }
 
 ?>

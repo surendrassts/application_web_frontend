@@ -69,7 +69,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div id="container">
     <div><h1>Welcome to Doctor App Module</h1>
         <div style="text-align:right;">
-        <?php if(isset ($_SESSION['user'])){?>Welcome <?php echo $_SESSION['user']->user_email;?> | <a href="<?php echo base_url();?>user/logout">Logout</a><?php }  else {?>
+        <?php if(isset ($_SESSION['user_web'])){?>Welcome <?php echo $_SESSION['user_web']->user_email;?> | <a href="<?php echo base_url();?>user/logout">Logout</a><?php }  else {?>
         <a href="<?php echo base_url();?>user/login">Login</a>
         <?php }?>
         </div>
@@ -78,7 +78,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div style="width: 20%;float: left">Left
                 <ul style="list-style: none">
                     <li><a href="<?php echo base_url();?>">Home</a></li>
-                    <?php if(isset ($_SESSION['user'])){?>
+                    <?php if(isset ($_SESSION['user_web'])){?>
                     <li><a href="<?php echo base_url();?>bbank/raisedrequests">Blood Requests</a>
                         <ul>
                             <li><a href="<?php echo base_url();?>bbank/raiserequest">Raise Request</a></li>

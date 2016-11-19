@@ -74,7 +74,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div style="width:20%;float: left;">Menu
                 <ul style="list-style: none;">
                     <li><a href="<?php echo base_url();?>">Home</a></li>
-                    <?php if(isset ($_SESSION['user'])){?>
+                    <?php if(isset ($_SESSION['user_web'])){?>
                     <li><a href="<?php echo base_url();?>bbank/raisedrequests">Blood Requests</a>
                         <ul>
                             <li><a href="<?php echo base_url();?>bbank/raiserequest">Raise Request</a></li>

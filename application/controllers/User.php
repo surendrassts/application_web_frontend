@@ -29,7 +29,7 @@ class User extends CI_Controller {
         }
         
         public function login() {
-            if (isset ($_SESSION['user'])) {
+            if (isset ($_SESSION['user_web'])) {
                 redirect('user/dashboard');
             }
             $data = array('msg'=>'','status'=>'','data'=>'');
